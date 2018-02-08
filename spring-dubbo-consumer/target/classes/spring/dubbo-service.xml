@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+		 http://code.alibabatech.com/schema/dubbo
+         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+    <dubbo:application name="spring-dubbo-consumer"  />
+    <dubbo:consumer>
+         <dubbo:parameter key="shutdown.timeout" value="60000" /> <!-- 单位毫秒 -->
+    </dubbo:consumer>
+    <dubbo:protocol name="dubbo" port="20881" >
+        <dubbo:parameter key="shutdown.timeout" value="60000" /> <!-- 单位毫秒 -->
+    </dubbo:protocol>
+    
+    
+    <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper"/>
+
+<!-- 	<bean id="test" class="com.gome.meidian.springmvc_dubbo.Test"/> -->
+	<!-- 调用 -->
+    <dubbo:reference id="permissionService" interface="com.dubbo.springdubbo.PermissionService"/>
+
+</beans>
